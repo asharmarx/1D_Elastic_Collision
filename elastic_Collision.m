@@ -1,10 +1,12 @@
 clear; clc;
 
 mass1 = 1;
-mass2 = 10000;
+mass2 = mass1 * 1e2;
 
-initialVelocity1 = 0;
-initialVelocity2 = -1;
+initVelocityVec = [0 -1];
+
+initialVelocity1 = initVelocityVec(1);
+initialVelocity2 = initVelocityVec(2);
 
 massConst1 = mass1 + mass2;
 massConst2 = mass2 - mass1;
@@ -14,8 +16,7 @@ collisionCount = 0;
 
 collisionDirection = 'e';
 
-
-while (initialVelocity2 <= abs(initialVelocity1)s)
+while velocityCheck(initialVelocity1, initialVelocity2)
     
     if  collisionDirection == 'e'
         finalVelocity1 = (2 * mass2 * initialVelocity2) / massConst1 + ...
@@ -38,16 +39,17 @@ while (initialVelocity2 <= abs(initialVelocity1)s)
         
     end
     
+    xlim([initVelocityVec(2), abs(initVelocityVec(2))]);
+    ylim([-sqrt(mass2), sqrt(mass2)]);
     
-    
+    hold on
+    grid on
+    plot(finalVelocity2, finalVelocity1, '*', 'linewidth', 2)
     
     collisionCount = collisionCount + 1;
     
-    fprintf('No. of Collisions: %d\n', collisionCount)
-    fprintf('Vf1: %d\n Vf2: %d\n', finalVelocity1, finalVelocity2)
+    F(collisionCount) = getframe(gcf);
     
+    fprintf('No. of Collisions: %d\n', collisionCount)    
     
 end
-
-
-
