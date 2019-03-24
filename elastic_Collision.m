@@ -16,6 +16,12 @@ collisionCount = 0;
 
 collisionDirection = 'e';
 
+finalVelocityVec = initVelocityVec;
+
+hold on
+grid on
+
+
 while velocityCheck(initialVelocity1, initialVelocity2)
     
     if  collisionDirection == 'e'
@@ -42,14 +48,25 @@ while velocityCheck(initialVelocity1, initialVelocity2)
     xlim([initVelocityVec(2), abs(initVelocityVec(2))]);
     ylim([-sqrt(mass2), sqrt(mass2)]);
     
-    hold on
-    grid on
-    plot(finalVelocity2, finalVelocity1, '*', 'linewidth', 2)
+    finalVelocityVec = [finalVelocityVec; [finalVelocity1 finalVelocity2]];
     
     collisionCount = collisionCount + 1;
     
-    F(collisionCount) = getframe(gcf);
-    
-    fprintf('No. of Collisions: %d\n', collisionCount)    
+    fprintf('No. of Collisions: %d\n', collisionCount)
     
 end
+
+finalVelocity1 = finalVelocityVec(:,1);
+finalVelocity2 = finalVelocityVec(:,2);
+
+for i = 1:length(finalVelocityVec)-1
+    
+    hold on
+    plot(finalVelocity2(i),finalVelocity1(i), '-*')
+    plot([finalVelocity2(i); finalVelocity2(i+1)],[finalVelocity1(i),...
+        finalVelocity1(i+1)],'-')
+
+    F(i) = getframe(gcf);
+    
+end
+
