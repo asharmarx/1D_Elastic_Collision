@@ -44,8 +44,6 @@ while velocityCheck(initialVelocity1, initialVelocity2)
         
     end
     
-    xlim([initVelocityVec(2), abs(initVelocityVec(2))]);
-    ylim([-sqrt(mass2), sqrt(mass2)]);
     
     finalVelocityVec = [finalVelocityVec; [finalVelocity1 finalVelocity2]];
     
@@ -60,6 +58,9 @@ finalVelocity2 = finalVelocityVec(:,2);
 
 for i = 1:length(finalVelocityVec)
     
+    xlim([initVelocityVec(2), abs(initVelocityVec(2))]);
+    ylim([-sqrt(mass2), sqrt(mass2)]);
+    
     hold on
     plot(finalVelocity2(i),finalVelocity1(i), 'o-b','linewidth', 20)
     
@@ -73,6 +74,33 @@ for i = 1:length(finalVelocityVec)
     F(i) = getframe(gcf);
     
 end
+
+massVf1 = sqrt(mass1) .* finalVelocity1;
+massVf2 = sqrt(mass2) .* finalVelocity2;
+
+hold off
+
+fig = figure();
+hold on
+
+for i = 1:length(finalVelocityVec)
+    
+    xlim([-sqrt(mass2), sqrt(mass2)]);
+    ylim([-sqrt(mass2), sqrt(mass2)]);
+    axis equal
+    plot(massVf2(i),massVf1(i), 'o-b','linewidth', 20)
+    
+    if i < length(finalVelocityVec)
+        plot([massVf2(i); massVf2(i+1)],[massVf1(i),...
+            massVf1(i+1)],'-')
+    else
+        continue
+    end
+    
+    K(i) = getframe(gcf);
+    
+end
+
 
 
 
