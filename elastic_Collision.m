@@ -64,6 +64,9 @@ for i = 1:length(finalVelocityVec)
     hold on
     plot(finalVelocity2(i),finalVelocity1(i), 'o-b','linewidth', 20)
     
+    xlabel('V_2','FontSize',12); 
+    ylabel('V_1','FontSize',12);
+    
     if i < length(finalVelocityVec)
         plot([finalVelocity2(i); finalVelocity2(i+1)],[finalVelocity1(i),...
             finalVelocity1(i+1)],'-')
@@ -81,7 +84,8 @@ massVf2 = sqrt(mass2) .* finalVelocity2;
 hold off
 
 fig = figure();
-hold on
+hold on;
+grid on;
 
 for i = 1:length(finalVelocityVec)
     
@@ -96,6 +100,9 @@ for i = 1:length(finalVelocityVec)
     else
         continue
     end
+    
+    xlabel('\surd(m_2)V_2','FontSize',12); 
+    ylabel('\surd(m_1)V_1','FontSize',12);
     
     K(i) = getframe(gcf);
     
