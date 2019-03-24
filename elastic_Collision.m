@@ -18,7 +18,6 @@ collisionDirection = 'e';
 
 finalVelocityVec = initVelocityVec;
 
-hold on
 grid on
 
 
@@ -59,14 +58,21 @@ end
 finalVelocity1 = finalVelocityVec(:,1);
 finalVelocity2 = finalVelocityVec(:,2);
 
-for i = 1:length(finalVelocityVec)-1
+for i = 1:length(finalVelocityVec)
     
     hold on
-    plot(finalVelocity2(i),finalVelocity1(i), '-*')
-    plot([finalVelocity2(i); finalVelocity2(i+1)],[finalVelocity1(i),...
-        finalVelocity1(i+1)],'-')
-
+    plot(finalVelocity2(i),finalVelocity1(i), 'o-b','linewidth', 20)
+    
+    if i < length(finalVelocityVec)
+        plot([finalVelocity2(i); finalVelocity2(i+1)],[finalVelocity1(i),...
+            finalVelocity1(i+1)],'-')
+    else
+        continue
+    end
+    
     F(i) = getframe(gcf);
     
 end
+
+
 
