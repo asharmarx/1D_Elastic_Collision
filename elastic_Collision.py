@@ -16,11 +16,30 @@ collisionDirection = 'e';
 
 finalVelocityVec = initVelocityVec;
 
-def collisionwithBox:
+def collisionwithBox(velocityVec):
     finalVelocity1 = (2 * mass2 * initialVelocity2) / massConst1 + (initialVelocity1 * massConst3) / massConst1;
 
     finalVelocity2 = (2 * mass1 * initialVelocity1) / massConst1 +
     (initialVelocity2 * massConst2) / massConst1;
 
-    initialVelocity1 = finalVelocity1;
-    initialVelocity2 = finalVelocity2;
+    return[finalVelocity1, finalVelocity2]
+
+def collisionwithWall(velocityVec):
+
+    finalVelocity1 = -1*initialVelocity1;
+    finalVelocity2 = finalVelocity2;
+
+    return[finalVelocity1, finalVelocity2]
+
+
+def velocityCheck(vel1, vel2):
+
+ret = True;
+
+if (vel1 >= 0 && vel2 >= 0)
+    if(abs(vel1) <= (vel2))
+        ret = False;
+    end
+end
+
+end
