@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 mass1 = 1
-mass2 = mass1 * 1e2
+mass2 = mass1 * 1e4
 
 initVelocityVec = [0, -1]
 
@@ -26,11 +26,12 @@ def collisionwithBox(vel1, vel2):
 
     return[finalVelocity1, finalVelocity2]
 
-def collisionwithWall(vel1):
+def collisionwithWall(vel1, vel2):
 
-    finalVelocity1 = -1*vel1
+    finalVelocity1 = -1 * vel1
+    finalVelocity2 = vel2
 
-    return[finalVelocity1]
+    return[finalVelocity1, finalVelocity2]
 
 
 def velocityCheck(vel1, vel2):
@@ -56,7 +57,7 @@ while (velocityCheck(initialVelocity1, initialVelocity2)):
 
     elif (collisionDirection == 'w'):
 
-        finalVelocity1 = collisionwithWall(initialVelocity1)
+        finalVelocity1, finalVelocity2 = collisionwithWall(initialVelocity1, initialVelocity2)
         initialVelocity1 = finalVelocity1
 
         collisionDirection = 'e'
