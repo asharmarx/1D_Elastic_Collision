@@ -76,14 +76,14 @@ while (velocityCheck(initialVelocity1, initialVelocity2)):
 finalVelocity1 = finalVelocityVec[:, 0]
 finalVelocity2 = finalVelocityVec[:, 1]
 
-for i in range(finalVelocityVec.shape[0]):
+vecLen = finalVelocityVec.shape[0]
 
-    plt.axis([initVelocityVec[1], abs(initVelocityVec[1]), -math.sqrt(mass2), math.sqrt(mass2)])
-    plt.plot(finalVelocity2[i],finalVelocity1[i], 'b-o', linewidth=2)
+for i in range(vecLen - 2):
+
+    plt.axis([1.2 * initVelocityVec[1], 1.2 * abs(initVelocityVec[1]), -1.2 * math.sqrt(mass2), 1.2 * math.sqrt(mass2)])
     plt.xlabel(r'$V_2$')
     plt.ylabel(r'$V_1$')
-
-    if (i < range(finalVelocityVec.shape[1])):
-        plt.plot(finalVelocity2[i], finalVelocity1[i], finalVelocity1[i], finalVelocity1[i+1],'-')
+    if (i < range(vecLen - 1)):
+        plt.plot(finalVelocity2[i:i+2], finalVelocity1[i:i+2],'ro-')
 
 plt.show()
