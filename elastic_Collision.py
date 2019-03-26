@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import math
+import sys
 
 mass1 = 1
-mass2 = mass1 * 1e4
+mass2 = mass1 * 1e2
 
 initVelocityVec = [0, -1]
 
@@ -25,6 +27,7 @@ def collisionwithBox(vel1, vel2):
     finalVelocity2 = (2 * mass1 * vel1) / massConst1 + (vel2 * massConst2) / massConst1
 
     return[finalVelocity1, finalVelocity2]
+
 
 def collisionwithWall(vel1, vel2):
 
@@ -63,9 +66,24 @@ while (velocityCheck(initialVelocity1, initialVelocity2)):
         collisionDirection = 'e'
 
 
-    finalVelocityVec = np.concatenate((finalVelocityVec, [finalVelocity1, finalVelocity2]))
+    finalVelocityVec = np.row_stack((finalVelocityVec, [finalVelocity1, finalVelocity2]))
 
     collisionCount += 1
 
     print("No. of Collisions: {}\n" .format(collisionCount))
     print("Vf1 = {0}\n Vf2 = {1}" .format(finalVelocity1, finalVelocity2))
+
+finalVelocity1 = finalVelocityVec[:, 0]
+finalVelocity2 = finalVelocityVec[:, 1]
+
+for i in range(finalVelocityVec.shape[0]):
+
+    plt.axis([initVelocityVec[1], abs(initVelocityVec[1]), -math.sqrt(mass2), math.sqrt(mass2)])
+    plt.plot(finalVelocity2[i],finalVelocity1[i], 'b-o', linewidth=2)
+    plt.xlabel(r'$V_2$')
+    plt.ylabel(r'$V_1$')
+
+    if (i < range(finalVelocityVec.shape[1])):
+        plt.plot(finalVelocity2[i], finalVelocity1[i], finalVelocity1[i], finalVelocity1[i+1],'-')
+
+plt.show()
