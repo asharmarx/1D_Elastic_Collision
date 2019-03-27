@@ -81,9 +81,11 @@ vecLen = finalVelocityVec.shape[0]
 for i in range(vecLen - 2):
 
     plt.axis([1.2 * initVelocityVec[1], 1.2 * abs(initVelocityVec[1]), -1.2 * math.sqrt(mass2), 1.2 * math.sqrt(mass2)])
+    plt.title(r'$Vf_2 vs. Vf_1$')
     plt.xlabel(r'$V_2$')
     plt.ylabel(r'$V_1$')
     if (i < range(vecLen - 1)):
         plt.plot(finalVelocity2[i:i+2], finalVelocity1[i:i+2],'ro-')
 
+plt.grid()
 plt.show()
